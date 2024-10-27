@@ -2,12 +2,12 @@ const package = require('./package.json');
 const codepoints = require('./src/template/mapping.json');
 
 module.exports = {
-    name: 'codicon',
-    prefix: 'codicon',
+    name: 'salesforcedx-icons',
+    prefix: 'salesforcedx-icon',
     codepoints: codepoints,
     inputDir: './src/icons',
     outputDir: './dist',
-    fontTypes: ['ttf'],
+    fontTypes: ['ttf', 'woff2'],
     normalize: true,
     assetTypes: ['css', 'html'],
     templates: {
@@ -16,6 +16,11 @@ module.exports = {
     },
     formatOptions: {
         ttf: {
+            url: package.url,
+            description: package.description,
+            version: package.fontVersion
+        },
+        woff2: {
             url: package.url,
             description: package.description,
             version: package.fontVersion
