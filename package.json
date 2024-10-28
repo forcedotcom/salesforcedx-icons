@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/salesforcedx-icons",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "The icon font for SFDX VSCode Extensions",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -29,6 +29,7 @@
     "svgo": "2.7.0"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }
