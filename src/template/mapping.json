@@ -1,7 +1,7 @@
 {
-  "agent-devs": 59648,
-  "generate-test": 59649,
-  "einstein-disabled": 59650,
+  "dev-assistant": 59648,
+  "test-case-generation": 59649,
+  "dev-assistant-disabled": 59650,
   "user-avatar": 59651,
-  "einstein-sleepy": 59652
+  "dev-assistant-sleepy": 59652
 }
