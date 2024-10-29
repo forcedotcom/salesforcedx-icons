@@ -1,5 +1,8 @@
 # -- CLEAN
 
+# Generated font and icon gallery
+dist/
+
 # use yarn by default, so ignore npm
 package-lock.json
 
