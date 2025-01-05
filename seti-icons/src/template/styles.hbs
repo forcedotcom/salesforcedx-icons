@@ -1,0 +1,62 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+@font-face {
+	font-family: "{{ name }}";
+	font-display: block;
+	src: {{{ fontSrc }}};
+}
+
+.seti-icon[class*='seti-icon-'] {
+	font: normal normal normal 16px/1 {{ name }};
+	display: inline-block;
+	text-decoration: none;
+	text-rendering: auto;
+	text-align: center;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+/*---------------------
+ *  Modifiers
+ *-------------------*/
+
+@keyframes seti-icon-spin {
+	100% {
+		transform:rotate(360deg);
+	}
+}
+
+.seti-icon-sync.seti-icon-modifier-spin,
+.seti-icon-loading.seti-icon-modifier-spin,
+.seti-icon-gear.seti-icon-modifier-spin {
+	/* Use steps to throttle FPS to reduce CPU usage */
+	animation: seti-icon-spin 1.5s steps(30) infinite;
+}
+
+.seti-icon-modifier-disabled {
+	opacity: 0.5;
+}
+
+.seti-icon-modifier-hidden {
+	opacity: 0;
+}
+
+/* custom speed & easing for loading icon */
+.seti-icon-loading {
+	animation-duration: 1s !important;
+	animation-timing-function: cubic-bezier(0.53, 0.21, 0.29, 0.67) !important;
+}
+
+/*---------------------
+ *  Icons
+ *-------------------*/
+
+{{# each codepoints }}
+.{{ ../prefix }}-{{ @key }}:before { content: "\\{{ codepoint this }}" }
+{{/ each }}
