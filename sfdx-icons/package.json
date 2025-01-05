@@ -2,8 +2,6 @@
   "name": "@salesforce/salesforcedx-icons",
   "version": "0.1.0",
   "description": "The icon font for SFDX VSCode Extensions",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
   "license": "BSD-3-Clause",
   "scripts": {
     "clean": "node ./scripts/reset.js",
