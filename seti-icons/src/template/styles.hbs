@@ -80,5 +80,5 @@
 }
 
 {{# each codepoints.color }}
-.{{ ../prefix }}-ext-{{ @key }}:before { color: {{ codepoint this }} }
+.{{ ../prefix }}-ext-{{ @key }}:before { color: var({{ codepoint this }}) }
 {{/ each }}
