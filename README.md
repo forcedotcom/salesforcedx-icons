@@ -1,6 +1,30 @@
 # SFDX and Seti Icons for VSCode Webviews
 
-This repository contains the source code and configuration for generating icon fonts for SFDX (Salesforce DX) and Seti icons. The icons are used in VSCode extensions.
+This repository contains the source code and configuration for generating icon fonts for SFDX (Salesforce DX) and Seti icons. The icons are used in VSCode extensions. The SFDX icons are custom icons used in saleforce vscode extensions, the Seti icons are a part of the Seti-UI theme which is the default theme in vscode.
+
+Seti icons are used for demarcating different file types based off language and extension, ie "javascript" and ".js" or ".mjs". These icons show up in the editor tab to the left of the file name. The icons/svgs and colors are taken from this repo https://github.com/jesseweed/seti-ui/tree/master/icons. You can see the output of this repo in the vscode repo itself here https://github.com/microsoft/vscode/blob/main/extensions/theme-seti/icons/seti.woff
+
+Webviews don't have access to these Seti icons the same way you can access the codicons via npm. You have to include them manually or via your own package. VSCode contains two icon fonts, Seti and codicons. As mentioned Seti is for file types and codicons are for everything else. You can learn more about codicons here https://github.com/microsoft/vscode-codicons. This repo is built to mirror the codicon repo. So using the 3 icon fonts follows the same pattern.
+
+SalesforceDX Icons
+
+```html
+<i class="salesforcedx-icon salesforcedx-icon-lightning"></i>
+```
+
+Set Icons
+
+```html
+<i class="seti-icon seti-icon-apex seti-icon-ext-cls"></i>
+```
+
+Codicons
+
+```html
+<i class="codicon codicon-add"></i>
+```
+
+> ! Note that Seti has two values passed in the class name. One for language and one for the .ext. Language gives you the right icon, ext gives you the right color.
 
 ### How to Use
 
