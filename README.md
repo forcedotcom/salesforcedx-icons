@@ -26,6 +26,8 @@ Codicons
 
 > ! Note that Seti has two values passed in the class name. One for language and one for the .ext. Language gives you the right icon, ext gives you the right color.
 
+<br>
+
 ### How to Use
 
 1. **Clone the Repository**
@@ -56,6 +58,8 @@ Codicons
 5. **Preview Icons**
 
    Open the generated HTML preview file in the `dist` directory to see all the icons and their names. You can search for icons by name or description. Clicking on the icon will copy the name of the icon.
+
+<br>
 
 ### Example Usage in a Project
 
@@ -116,6 +120,8 @@ In your webview, depending on how you have things setup, you may need to move th
 
 _! Notice that the seti icons have two declarations, one for the language "apex" and one for the file extension "cls". The name of the language gives you the right icon and the extension gives you the right color._
 
+<br>
+
 ### Scripts
 
 Clean: Clears the dist directory.
@@ -153,6 +159,8 @@ Build: Runs all the necessary steps to generate the final assets.
 ```
 yarn build
 ```
+
+<br>
 
 ### How to Add New SVGs to the Icon Font
 
