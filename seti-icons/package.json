@@ -6,12 +6,13 @@
   "scripts": {
     "clean": "node ./scripts/reset.js",
     "svgo": "svgo -f ./src/icons/ --config svgo.config.js",
-    "sprite": "node ./scripts/svg-sprite.js --outDir dist --outFile salesforcedx-icons.svg",
-    "export-to-ts": "node ./scripts/export-to-ts.js  -f ./src/template/mapping.json > ./dist/salesforcedx-iconsLibrary.ts",
-    "export-to-csv": "node ./scripts/export-to-csv.js -f ./dist/salesforcedx-icons.ttf          > ./dist/salesforcedx-icons.csv",
+    "sprite": "node ./scripts/svg-sprite.js --outDir dist --outFile seti-icons.svg",
+    "export-to-ts": "node ./scripts/export-to-ts.js  -f ./src/template/mapping.json > ./dist/seti-iconsLibrary.ts",
+    "export-to-csv": "node ./scripts/export-to-csv.js -f ./dist/seti-icons.ttf          > ./dist/seti-icons.csv",
     "fonts": "fantasticon",
     "build": "npm run clean && npm run svgo && npm run fonts && npm run export-to-ts && npm run export-to-csv && npm run sprite",
-    "release": "release-it"
+    "release": "release-it",
+    "postbuild": "node ./scripts/generate-css.js"
   },
   "repository": "forcedotcom/library-template",
   "bugs": {
@@ -24,7 +25,8 @@
     "opentype.js": "^1.3.3",
     "release-it": "^17.11.0",
     "svg-sprite": "^2.0.4",
-    "svgo": "2.8.0"
+    "svgo": "2.8.0",
+    "handlebars": "^4.7.8"
   },
   "publishConfig": {
     "access": "public",
