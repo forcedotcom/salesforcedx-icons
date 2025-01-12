@@ -4,7 +4,7 @@ const Handlebars = require('handlebars');
 
 const colorsFilePath = path.join(__dirname, '../src/template/colors.json');
 const templateFilePath = path.join(__dirname, '../src/template/styles-colors.hbs');
-const outputFilePath = path.join(__dirname, '../dist/colors.css');
+const outputFilePath = path.join(__dirname, '../dist/seti-colors.css');
 
 const colors = JSON.parse(fs.readFileSync(colorsFilePath, 'utf8'));
 
