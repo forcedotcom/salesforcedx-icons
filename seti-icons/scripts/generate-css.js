@@ -10,7 +10,7 @@ const colors = JSON.parse(fs.readFileSync(colorsFilePath, 'utf8'));
 
 // Register the 'color' helper
 Handlebars.registerHelper('color', function(key) {
-    return colors[key] || 'seti-color-default';
+    return colors[key] || '--seti-white';
 });
 
 const templateSource = fs.readFileSync(templateFilePath, 'utf8');
