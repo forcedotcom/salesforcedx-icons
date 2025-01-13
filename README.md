@@ -1,6 +1,6 @@
 # SFDX and Seti Icons for VSCode Webviews
 
-This repository contains the source code and configuration for generating icon fonts for SFDX (Salesforce DX) and Seti icons. The icons are used in VSCode Extension Webviews. The SFDX icons are custom icons used in saleforce vscode extensions, the Seti icons are a part of the Seti-UI theme which is the default native theme in vscode.
+This repository contains the source code and configuration for generating icon fonts for SFDX (Salesforce DX) and Seti icons. The icons are used in VSCode Extension Webviews. The SFDX icons are custom icons used for Salesforce extensions, the Seti icons are a part of the Seti-UI theme which is the default native theme in vscode.
 
 #### VSCode Native Icons
 
@@ -19,7 +19,7 @@ SalesforceDX Icons
 Set Icons
 
 ```html
-<i class="seti-icon seti-icon-apex seti-icon-ext-cls"></i>
+<i class="seti-icon seti-icon-apex seti-color-cls"></i>
 ```
 
 Codicons
@@ -78,7 +78,7 @@ To use the generated icon font in your project, include the CSS file and use the
     <link rel="stylesheet" href="path/to/generated/css/file.css" />
   </head>
   <body>
-    <i class="seti-icon seti-icon-apex seti-icon-ext-cls"></i>
+    <i class="seti-icon seti-icon-apex seti-color-cls"></i>
     <i class="salesforcedx-icon salesforcedx-icon-lightning"></i>
   </body>
 </html>
@@ -86,7 +86,7 @@ To use the generated icon font in your project, include the CSS file and use the
 
 Replace `path/to/generated/css/file.css` with the actual path to the generated CSS file in the `dist` directory. The icon classes `seti-icon-apex, salesforcedx-icon-lightning` etc. correspond to the icons defined in the mapping files.
 
-> _! Notice that the seti icons have two declarations, one for the language "apex" and one for the file extension "cls". The name of the language gives you the right icon and the extension gives you the right color._
+> _! Notice that the seti icons have two properties in the class name, one for the language "apex" and one for the file extension "cls". The name of the language gives you the right icon and the extension gives you the right color._
 
 In your webview, depending on how you have things setup, you may need to move the `@font-face` definition out of the generated css file and add it to your `Provider` where you resolve your Webview. This could look something like this:
 
@@ -121,8 +121,6 @@ In your webview, depending on how you have things setup, you may need to move th
 </html>
 `;
 ```
-
-_! Notice that the seti icons have two declarations, one for the language "apex" and one for the file extension "cls". The name of the language gives you the right icon and the extension gives you the right color._
 
 <br>
 
