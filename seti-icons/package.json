@@ -12,7 +12,7 @@
     "fonts": "fantasticon",
     "build": "npm run clean && npm run svgo && npm run fonts && npm run export-to-ts && npm run export-to-csv && npm run sprite",
     "release": "release-it",
-    "postbuild": "node ./scripts/generate-css.js"
+    "postbuild": "node ./scripts/generate-seti-color.js"
   },
   "repository": "forcedotcom/library-template",
   "bugs": {
