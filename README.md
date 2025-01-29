@@ -28,7 +28,7 @@ Codicons
 <i class="codicon codicon-add"></i>
 ```
 
-> ! Note that Seti has two values passed in the class name. One for language and one for the .ext. `apex` gives you the right icon, `cls` gives you the right color.
+> **Note:** Seti has two values passed in the class name. One for language and one for the .ext. `apex` gives you the right icon, `cls` gives you the right color.
 
 <br>
 
