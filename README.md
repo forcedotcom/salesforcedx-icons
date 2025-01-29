@@ -1,4 +1,4 @@
-# SFDX and Seti Icons for VSCode Webviews
+# SFDX and Seti Icons
 
 This repository contains the source code and configuration for generating icon fonts for SFDX (Salesforce DX) and Seti icons. The icons are used in VSCode Extension Webviews. The SFDX icons are custom icons used for Salesforce extensions, the Seti icons are a part of the Seti-UI theme which is the default native theme in vscode.
 
@@ -41,23 +41,25 @@ Codicons
    cd <repository-directory>
    ```
 
-2. **Install Dependencies**
+2. **Install and Build Seti Icons**
 
    ```sh
+   cd seti-icons
    yarn install
+   yarn build
    ```
 
-3. **Build the Icons**
-
-   Run the build script to generate the icon fonts and other assets\*\*
+3. **Install and build SFDX Icons**
 
    ```sh
+   cd sfdx-icons
+   yarn install
    yarn build
    ```
 
 4. **Generated Assets**
 
-   The generated assets will be available in the `dist` directory. This includes the icon fonts (.ttf, .woff2), CSS, HTML preview, and other related files.
+   The generated assets will be available in the `dist` directory of each folder. This includes the icon fonts (.ttf, .woff2), CSS, HTML preview, and other related files.
 
 5. **Preview Icons**
 
