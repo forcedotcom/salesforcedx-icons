@@ -1,4 +1,4 @@
-# SFDX and Seti Icons
+# SFDX Icons
 
 This repository contains the source code and configuration for generating icon fonts for SFDX (Salesforce DX) and Seti icons. The icons are used in VSCode Extension Webviews. The SFDX icons are custom icons used for Salesforce extensions, the Seti icons are a part of the Seti-UI theme which is the default native theme in vscode.
 
@@ -45,16 +45,16 @@ Codicons
 
    ```sh
    cd seti-icons
-   yarn install
-   yarn build
+   npm run install
+   npm run build
    ```
 
 3. **Install and build SFDX Icons**
 
    ```sh
    cd sfdx-icons
-   yarn install
-   yarn build
+   npm run install
+   npm run build
    ```
 
 4. **Generated Assets**
@@ -131,37 +131,37 @@ In your webview, depending on how you have things setup, you may need to move th
 Clean: Clears the dist directory.
 
 ```
-yarn clean
+npm run clean
 ```
 
 Optimize SVGs: Optimizes the SVG files in the src/icons directory.
 
 ```
-yarn svgo
+npm run svgo
 ```
 
 Generate Sprite: Generates an SVG sprite from the icons.
 
 ```
-yarn sprite
+npm run sprite
 ```
 
 Export to TypeScript: Exports the icon mappings to a TypeScript file.
 
 ```
-yarn export-to-ts
+npm run export-to-ts
 ```
 
 Export to CSV: Exports the icon mappings to a CSV file.
 
 ```
-yarn export-to-csv
+npm run export-to-csv
 ```
 
 Build: Runs all the necessary steps to generate the final assets.
 
 ```
-yarn build
+npm run build
 ```
 
 <br>
@@ -181,7 +181,7 @@ To add new SVG icons to the icon font, follow these steps:
    Run the optimization script to ensure the SVG is properly formatted and optimized for use in the icon font.
 
    ```sh
-   yarn svgo
+   npm run svgo
    ```
 
 3. **Update the Icon Mapping**
@@ -212,7 +212,7 @@ To add new SVG icons to the icon font, follow these steps:
    Run the build script to regenerate the icon fonts and other assets with your new SVG included.
 
    ```sh
-   yarn build
+   npm run build
    ```
 
 6. **Verify the New Icon**
