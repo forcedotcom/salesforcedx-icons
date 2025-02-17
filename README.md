@@ -1,4 +1,4 @@
-# SFDX Icons
+# Salesforce DX Icons
 
 This repository contains the source code and configuration for generating icon fonts for SFDX (Salesforce DX) and Seti icons. The icons are used in VSCode Extension Webviews. The SFDX icons are custom icons used for Salesforce extensions, the Seti icons are a part of the Seti-UI theme which is the default native theme in vscode.
 
