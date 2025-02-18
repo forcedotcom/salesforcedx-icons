@@ -1,5 +1,5 @@
-const package = require("./package.json");
-const codepoints = require("./src/seti-icons/template/mapping.json");
+const package = require("./../../package.json");
+const codepoints = require("./template/mapping.json");
 
 module.exports = {
   name: "seti-icons",
