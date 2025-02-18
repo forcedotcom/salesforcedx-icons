@@ -144,8 +144,6 @@ npm run export-csv
 npm run build
 ```
 
-<br>
-
 ### How to Update the SFDX Icon Font
 
 > _You should only need to update the sfdx-icons, seti-icons will only be updated if there is a change in VSCode._
