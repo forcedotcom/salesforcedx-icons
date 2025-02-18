@@ -11,7 +11,7 @@ const config = {
   },
 };
 const spriter = new SVGSpriter(config);
-const mapping = require("../src/seti-icons/src/template/mapping.json");
+const mapping = require(`./../src/${opts.iconSet}/template/mapping.json`);
 
 const mappingEntries = Object.entries(mapping);
 
@@ -20,12 +20,12 @@ const findNames = (symbol) => {
 };
 
 mappingEntries.forEach(([mappedName, symbol]) => {
-  const file = path.resolve(`./src/icons/${mappedName}.svg`);
+  const file = path.resolve(`./../src/${opts.iconSet}/icons/${mappedName}.svg`);
 
   if (fs.existsSync(file)) {
     for (const name of findNames(symbol)) {
       spriter.add(
-        path.resolve(`./src/icons/${name}.svg`),
+        path.resolve(`./../src/${opts.iconSet}/icons/${name}.svg`),
         name + ".svg",
         fs.readFileSync(file, "utf-8")
       );
