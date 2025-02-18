@@ -1,24 +1,24 @@
 {
-  "name": "@salesforce/seti-icons",
+  "name": "@salesforce/salesforcedx-icons",
   "version": "0.1.0",
-  "description": "The icon font for default VSCode file icons",
+  "description": "Icon fonts for Salesforce's VSCode extensions.",
   "license": "BSD-3-Clause",
   "scripts": {
-    "clean": "node ./scripts/reset.js",
-    "svgo": "svgo -f ./src/seti-icons/icons/ --config svgo.config.js",
-    "sprite": "node ./scripts/svg-sprite.js --outDir dist/seti-icons --iconSet seti-icons --outFile seti-icons.svg",
-    "export-to-ts": "node ./scripts/export-ts.js  -f ./src/seti-icons/template/mapping.json > ./dist/seti-icons/seti-iconsLibrary.ts",
-    "export-to-csv": "node ./scripts/export-csv.js -f ./dist/seti-icons/seti-icons.ttf > ./dist/seti-icons/seti-icons.csv",
-    "fonts": "fantasticon --config ./src/seti-icons/fantasticon.js",
-    "build": "npm run clean && npm run svgo && npm run fonts && npm run export-to-ts && npm run export-to-csv && npm run sprite",
-    "release": "release-it",
-    "postbuild": "node ./scripts/seti-color.js"
+    "clean": "node ./scripts/reset.js --folders seti-icons,sfdx-icons",
+    "svgo": "for dir in seti-icons sfdx-icons; do svgo -f ./src/$dir/icons/ --config svgo.config.js; done",
+    "sprite": "for dir in seti-icons sfdx-icons; do node ./scripts/svg-sprite.js --outDir dist/$dir --iconSet $dir --outFile $dir.svg; done",
+    "export-ts": "for dir in seti-icons sfdx-icons; do node ./scripts/export-ts.js -f ./src/$dir/template/mapping.json > ./dist/$dir/$dirLibrary.ts; done",
+    "export-csv": "for dir in seti-icons sfdx-icons; do node ./scripts/export-csv.js -f ./dist/$dir/$dir.ttf > ./dist/$dir/$dir.csv; done",
+    "fonts": "for dir in seti-icons sfdx-icons; do fantasticon --config ./src/$dir/fantasticon.js; done",
+    "build": "npm run clean && npm run svgo && npm run fonts && npm run export-ts && npm run export-csv && npm run sprite",
+    "postbuild": "node ./scripts/seti-color.js",
+    "release": "release-it"
   },
-  "repository": "forcedotcom/library-template",
+  "repository": "forcedotcom/salesforcedx-icons",
   "bugs": {
-    "url": "https://github.com/forcedotcom/library-template/issues"
+    "url": "https://github.com/forcedotcom/salesforcedx-icons/issues"
   },
-  "homepage": "https://github.com/forcedotcom/library-template#readme",
+  "homepage": "https://github.com/forcedotcom/salesforcedx-icons#readme",
   "devDependencies": {
     "ansi-regex": ">=5.0.1",
     "fantasticon": "^1.2.3",
