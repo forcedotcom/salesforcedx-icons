@@ -1,0 +1,65 @@
+/*---------------------------------------------------------------------------------------------
+ * This file is generated from the salesforce-dx icon repository. https://github.com/forcedotcom/salesforcedx-icons
+ * Copyright (c) 2024, salesforce.com, inc.
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ *--------------------------------------------------------------------------------------------*/
+
+@font-face {
+	font-family: "{{ name }}";
+	font-display: block;
+	src: {{{ fontSrc }}};
+}
+
+.sfdx-icon[class*='sfdx-icon-'] {
+	font: normal normal normal 16px/1 {{ name }};
+	display: inline-block;
+	text-decoration: none;
+	text-rendering: auto;
+	text-align: center;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+/*---------------------
+ *  Modifiers
+ *-------------------*/
+
+@keyframes sfdx-icon-spin {
+	100% {
+		transform:rotate(360deg);
+	}
+}
+
+.sfdx-icon-sync.sfdx-icon-modifier-spin,
+.sfdx-icon-loading.sfdx-icon-modifier-spin,
+.sfdx-icon-gear.sfdx-icon-modifier-spin {
+	/* Use steps to throttle FPS to reduce CPU usage */
+	animation: sfdx-icon-spin 1.5s steps(30) infinite;
+}
+
+.sfdx-icon-modifier-disabled {
+	opacity: 0.5;
+}
+
+.sfdx-icon-modifier-hidden {
+	opacity: 0;
+}
+
+/* custom speed & easing for loading icon */
+.sfdx-icon-loading {
+	animation-duration: 1s !important;
+	animation-timing-function: cubic-bezier(0.53, 0.21, 0.29, 0.67) !important;
+}
+
+/*---------------------
+ *  Icons
+ *-------------------*/
+
+{{# each codepoints }}
+.{{ ../prefix }}-{{ @key }}:before { content: "\\{{ codepoint this }}" }
+{{/ each }}

@@ -1,0 +1,36 @@
+{
+  "name": "@salesforce/salesforcedx-icons",
+  "version": "0.1.0",
+  "description": "Icon fonts for Salesforce's VSCode extensions.",
+  "license": "BSD-3-Clause",
+  "scripts": {
+    "clean": "node ./scripts/reset.js --folders seti-icons,sfdx-icons",
+    "svgo": "for dir in seti-icons sfdx-icons; do svgo -f ./src/${dir}/icons/ --config svgo.config.js; done",
+    "sprite": "for dir in seti-icons sfdx-icons; do node ./scripts/svg-sprite.js --outDir dist/${dir} --iconSet ${dir} --outFile ${dir}.svg; done",
+    "export-ts": "for dir in seti-icons sfdx-icons; do node ./scripts/export-ts.js -f ./src/${dir}/template/mapping.json > ./dist/${dir}/${dir}Library.ts; done",
+    "export-csv": "for dir in seti-icons sfdx-icons; do node ./scripts/export-csv.js -f ./dist/${dir}/${dir}.ttf > ./dist/${dir}/${dir}.csv; done",
+    "fonts": "for dir in seti-icons sfdx-icons; do fantasticon --config ./src/$dir/fantasticon.js; done",
+    "build": "npm run clean && npm run svgo && npm run fonts && npm run export-ts && npm run export-csv && npm run sprite",
+    "postbuild": "node ./scripts/seti-color.js",
+    "open": "for dir in seti-icons sfdx-icons; do open ./dist/${dir}/${dir}.html; done",
+    "release": "release-it"
+  },
+  "repository": "forcedotcom/salesforcedx-icons",
+  "bugs": {
+    "url": "https://github.com/forcedotcom/salesforcedx-icons/issues"
+  },
+  "homepage": "https://github.com/forcedotcom/salesforcedx-icons#readme",
+  "devDependencies": {
+    "ansi-regex": ">=5.0.1",
+    "fantasticon": "^1.2.3",
+    "opentype.js": "^1.3.3",
+    "release-it": "^18.1.2",
+    "svg-sprite": "^2.0.4",
+    "svgo": "2.8.0",
+    "handlebars": "^4.7.8"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}
