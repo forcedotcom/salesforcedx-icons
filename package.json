@@ -9,7 +9,7 @@
     "sprite": "node ./scripts/svg-sprite.js --outDir dist/seti-icons --iconSet seti-icons --outFile seti-icons.svg",
     "export-to-ts": "node ./scripts/export-ts.js  -f ./src/seti-icons/template/mapping.json > ./dist/seti-icons/seti-iconsLibrary.ts",
     "export-to-csv": "node ./scripts/export-csv.js -f ./dist/seti-icons/seti-icons.ttf > ./dist/seti-icons/seti-icons.csv",
-    "fonts": "fantasticon --config ./src/seti-icons/fantasticon.json",
+    "fonts": "fantasticon --config ./src/seti-icons/fantasticon.js",
     "build": "npm run clean && npm run svgo && npm run fonts && npm run export-to-ts && npm run export-to-csv && npm run sprite",
     "release": "release-it",
     "postbuild": "node ./scripts/seti-color.js"
