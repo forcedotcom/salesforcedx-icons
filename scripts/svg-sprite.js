@@ -11,7 +11,7 @@ const config = {
   },
 };
 const spriter = new SVGSpriter(config);
-const mapping = require("../src/template/mapping.json");
+const mapping = require("../src/seti-icons/src/template/mapping.json");
 
 const mappingEntries = Object.entries(mapping);
 
@@ -27,7 +27,7 @@ mappingEntries.forEach(([mappedName, symbol]) => {
       spriter.add(
         path.resolve(`./src/icons/${name}.svg`),
         name + ".svg",
-        fs.readFileSync(file, "utf-8"),
+        fs.readFileSync(file, "utf-8")
       );
     }
   }
