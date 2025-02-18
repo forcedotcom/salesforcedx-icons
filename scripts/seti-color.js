@@ -4,13 +4,16 @@ const Handlebars = require("handlebars");
 
 const colorsFilePath = path.join(
   __dirname,
-  "./src/seti-icons/template/colors.json"
+  "./../src/seti-icons/template/colors.json"
 );
 const templateFilePath = path.join(
   __dirname,
-  "./src/seti-icons/template/styles-colors.hbs"
+  "./../src/seti-icons/template/styles-colors.hbs"
 );
-const outputFilePath = path.join(__dirname, "./dist/seti-icons/seti-icons.css");
+const outputFilePath = path.join(
+  __dirname,
+  "./../dist/seti-icons/seti-icons.css"
+);
 
 const colors = JSON.parse(fs.readFileSync(colorsFilePath, "utf8"));
 
