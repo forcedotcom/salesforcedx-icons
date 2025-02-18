@@ -12,7 +12,7 @@
 	src: {{{ fontSrc }}};
 }
 
-.salesforcedx-icon[class*='salesforcedx-icon-'] {
+.sfdx-icon[class*='sfdx-icon-'] {
 	font: normal normal normal 16px/1 {{ name }};
 	display: inline-block;
 	text-decoration: none;
@@ -29,29 +29,29 @@
  *  Modifiers
  *-------------------*/
 
-@keyframes salesforcedx-icon-spin {
+@keyframes sfdx-icon-spin {
 	100% {
 		transform:rotate(360deg);
 	}
 }
 
-.salesforcedx-icon-sync.salesforcedx-icon-modifier-spin,
-.salesforcedx-icon-loading.salesforcedx-icon-modifier-spin,
-.salesforcedx-icon-gear.salesforcedx-icon-modifier-spin {
+.sfdx-icon-sync.sfdx-icon-modifier-spin,
+.sfdx-icon-loading.sfdx-icon-modifier-spin,
+.sfdx-icon-gear.sfdx-icon-modifier-spin {
 	/* Use steps to throttle FPS to reduce CPU usage */
-	animation: salesforcedx-icon-spin 1.5s steps(30) infinite;
+	animation: sfdx-icon-spin 1.5s steps(30) infinite;
 }
 
-.salesforcedx-icon-modifier-disabled {
+.sfdx-icon-modifier-disabled {
 	opacity: 0.5;
 }
 
-.salesforcedx-icon-modifier-hidden {
+.sfdx-icon-modifier-hidden {
 	opacity: 0;
 }
 
 /* custom speed & easing for loading icon */
-.salesforcedx-icon-loading {
+.sfdx-icon-loading {
 	animation-duration: 1s !important;
 	animation-timing-function: cubic-bezier(0.53, 0.21, 0.29, 0.67) !important;
 }
