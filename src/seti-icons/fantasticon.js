@@ -7,7 +7,7 @@ module.exports = {
   codepoints: codepoints,
   inputDir: "./src/seti-icons/icons",
   outputDir: "./dist/seti-icons",
-  fontTypes: ["ttf", "woff2"],
+  fontTypes: ["woff2"],
   normalize: true,
   assetTypes: ["css", "html"],
   templates: {
@@ -15,11 +15,6 @@ module.exports = {
     css: "./src/seti-icons/template/styles.hbs",
   },
   formatOptions: {
-    ttf: {
-      url: package.url,
-      description: package.description,
-      version: package.fontVersion,
-    },
     woff2: {
       url: package.url,
       description: package.description,
