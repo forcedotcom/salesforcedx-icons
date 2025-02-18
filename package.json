@@ -12,6 +12,7 @@
     "fonts": "for dir in seti-icons sfdx-icons; do fantasticon --config ./src/$dir/fantasticon.js; done",
     "build": "npm run clean && npm run svgo && npm run fonts && npm run export-ts && npm run export-csv && npm run sprite",
     "postbuild": "node ./scripts/seti-color.js",
+    "open": "for dir in seti-icons sfdx-icons; do open ./dist/${dir}/${dir}.html; done",
     "release": "release-it"
   },
   "repository": "forcedotcom/salesforcedx-icons",
