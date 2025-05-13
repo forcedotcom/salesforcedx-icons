@@ -7,7 +7,7 @@ module.exports = {
   codepoints: codepoints,
   inputDir: "./src/sfdx-icons/icons",
   outputDir: "./dist/sfdx-icons",
-  fontTypes: ["woff2"],
+  fontTypes: ["woff2", "ttf"],
   normalize: true,
   assetTypes: ["css", "html"],
   templates: {
