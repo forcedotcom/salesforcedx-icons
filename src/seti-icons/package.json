@@ -1,0 +1,38 @@
+{
+  "name": "@salesforce/seti-icons",
+  "version": "0.1.0",
+  "description": "Seti file type icon font for Visual Studio Code extensions",
+  "main": "seti-iconsLibrary.ts",
+  "types": "seti-iconsLibrary.ts",
+  "files": [
+    "seti-icons.css",
+    "seti-icons.ttf",
+    "seti-icons.woff2",
+    "seti-icons.svg",
+    "seti-iconsLibrary.ts",
+    "README.md"
+  ],
+  "keywords": [
+    "icons",
+    "font",
+    "seti",
+    "file-types",
+    "vscode",
+    "salesforce"
+  ],
+  "author": "Salesforce",
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/forcedotcom/salesforcedx-icons.git",
+    "directory": "dist/seti-icons"
+  },
+  "bugs": {
+    "url": "https://github.com/forcedotcom/salesforcedx-icons/issues"
+  },
+  "homepage": "https://github.com/forcedotcom/salesforcedx-icons#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}

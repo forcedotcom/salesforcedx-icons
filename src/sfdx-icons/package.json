@@ -1,0 +1,37 @@
+{
+  "name": "@salesforce/sfdx-icons",
+  "version": "0.1.0",
+  "description": "Salesforce DX icon font for Visual Studio Code extensions",
+  "main": "sfdx-iconsLibrary.ts",
+  "types": "sfdx-iconsLibrary.ts",
+  "files": [
+    "sfdx-icons.css",
+    "sfdx-icons.ttf",
+    "sfdx-icons.woff2",
+    "sfdx-icons.svg",
+    "sfdx-iconsLibrary.ts",
+    "README.md"
+  ],
+  "keywords": [
+    "icons",
+    "font",
+    "salesforce",
+    "sfdx",
+    "vscode"
+  ],
+  "author": "Salesforce",
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/forcedotcom/salesforcedx-icons.git",
+    "directory": "dist/sfdx-icons"
+  },
+  "bugs": {
+    "url": "https://github.com/forcedotcom/salesforcedx-icons/issues"
+  },
+  "homepage": "https://github.com/forcedotcom/salesforcedx-icons#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}
