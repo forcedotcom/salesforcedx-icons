@@ -34,6 +34,11 @@ function readIconSet(args) {
   return values.iconSet;
 }
 
+function toGlobPath(directory, platform = process.platform) {
+  // Fantasticon passes inputDir to glob, whose patterns require forward slashes.
+  return platform === "win32" ? directory.replaceAll("\\", "/") : directory;
+}
+
 function normalizeLegacyViewBox(source) {
   const document = new DOMParser({
     onError: onWarningStopParsing,
@@ -101,7 +106,7 @@ async function main(args = process.argv.slice(2)) {
   try {
     await generateFonts({
       ...config,
-      inputDir: inputDirectory,
+      inputDir: toGlobPath(inputDirectory),
       codepoints: { ...config.codepoints, ...aliasesFor(iconSet) },
     });
   } finally {
@@ -123,4 +128,5 @@ module.exports = {
   normalizeLegacyViewBox,
   prepareInputDirectory,
   readIconSet,
+  toGlobPath,
 };

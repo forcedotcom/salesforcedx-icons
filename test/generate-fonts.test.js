@@ -40,6 +40,16 @@ test("generate-fonts applies Fantasticon 1 wide-viewBox normalization", () => {
   assert.equal(normalizeLegacyViewBox(tall), tall);
 });
 
+test("generate-fonts converts Windows input directories to glob paths", () => {
+  const { toGlobPath } = require(script);
+
+  assert.equal(
+    toGlobPath("C:\\Users\\runner\\AppData\\Local\\Temp\\icons", "win32"),
+    "C:/Users/runner/AppData/Local/Temp/icons"
+  );
+  assert.equal(toGlobPath("/tmp/icons", "linux"), "/tmp/icons");
+});
+
 test("generate-fonts prepares canonical action sources without changing source", () => {
   const { prepareInputDirectory } = require(script);
   const sourceDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "font-source-"));
