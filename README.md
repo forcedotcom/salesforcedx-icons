@@ -32,6 +32,8 @@ Unlike Codicons which can be installed via npm, Seti icons aren't directly acces
 
 ## Building the Icons
 
+Building requires Node.js 22.9 or later and npm 10 or later.
+
 1. **Clone the repository:**
 
    ```sh
@@ -39,10 +41,10 @@ Unlike Codicons which can be installed via npm, Seti icons aren't directly acces
    cd <repository-directory>
    ```
 
-2. **Build the icons:**
+2. **Install dependencies and build the icons:**
 
    ```sh
-   npm run install
+   npm ci
    npm run build
    ```
 
