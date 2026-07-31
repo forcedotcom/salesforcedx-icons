@@ -5,14 +5,16 @@
   "license": "BSD-3-Clause",
   "scripts": {
     "clean": "node ./scripts/reset.js --folders seti-icons,sfdx-icons",
-    "svgo": "for dir in seti-icons sfdx-icons; do svgo -f ./src/${dir}/icons/ --config svgo.config.js; done",
-    "sprite": "for dir in seti-icons sfdx-icons; do node ./scripts/svg-sprite.js --outDir dist/${dir} --iconSet ${dir} --outFile ${dir}.svg; done",
-    "export-ts": "for dir in seti-icons sfdx-icons; do node ./scripts/export-ts.js -f ./src/${dir}/template/mapping.json > ./dist/${dir}/${dir}Library.ts; done",
-    "export-csv": "for dir in seti-icons sfdx-icons; do node ./scripts/export-csv.js -f ./dist/${dir}/${dir}.ttf > ./dist/${dir}/${dir}.csv; done",
-    "fonts": "for dir in seti-icons sfdx-icons; do fantasticon --config ./src/$dir/fantasticon.js; done",
+    "svgo": "node ./scripts/run-icon-sets.js svgo",
+    "sprite": "node ./scripts/run-icon-sets.js sprite",
+    "export-ts": "node ./scripts/run-icon-sets.js export-ts",
+    "export-csv": "node ./scripts/run-icon-sets.js export-csv",
+    "fonts": "node ./scripts/run-icon-sets.js fonts",
     "copy-packages": "node ./scripts/copy-packages.js",
+    "test": "node --test",
+    "validate": "node ./scripts/validate-build.js",
     "build": "npm run clean && npm run svgo && npm run fonts && npm run export-ts && npm run export-csv && npm run sprite && npm run copy-packages",
-    "postbuild": "node ./scripts/seti-color.js",
+    "postbuild": "node ./scripts/seti-color.js && npm run validate",
     "open": "for dir in seti-icons sfdx-icons; do open ./dist/${dir}/${dir}.html; done",
     "publish:seti": "cd ./dist/seti-icons && npm publish",
     "publish:sfdx": "cd ./dist/sfdx-icons && npm publish",
@@ -24,13 +26,24 @@
     "url": "https://github.com/forcedotcom/salesforcedx-icons/issues"
   },
   "homepage": "https://github.com/forcedotcom/salesforcedx-icons#readme",
+  "engines": {
+    "node": ">=22.9.0",
+    "npm": ">=10"
+  },
   "devDependencies": {
-    "ansi-regex": ">=5.0.1",
-    "fantasticon": "^1.2.3",
-    "opentype.js": "^1.3.3",
-    "svg-sprite": "^2.0.4",
-    "svgo": "2.8.0",
-    "handlebars": "^4.7.8"
+    "@xmldom/xmldom": "0.9.10",
+    "fantasticon": "4.1.0",
+    "handlebars": "4.7.9",
+    "minimist": "1.2.8",
+    "opentype.js": "2.0.0",
+    "svgo": "4.0.2"
+  },
+  "overrides": {
+    "fantasticon": {
+      "ttf2woff2": {
+        "node-gyp": "12.4.0"
+      }
+    }
   },
   "publishConfig": {
     "access": "public",

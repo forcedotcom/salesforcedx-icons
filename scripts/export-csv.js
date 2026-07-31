@@ -1,49 +1,74 @@
 // https://github.com/bitinn/character-map
 
-var opts = require("minimist")(process.argv.slice(2));
-var opentype = require("opentype.js");
-
-if (!opts.f || typeof opts.f !== "string") {
-  console.log(
-    "use -f to specify your font path, TrueType and OpenType supported"
-  );
-  return;
-}
-
-opentype.load(opts.f, function(err, font) {
-  if (err) {
-    console.log(err);
-    return;
-  }
-
-  var glyphs = font.glyphs.glyphs;
-  if (!glyphs || glyphs.length === 0) {
-    console.log("no glyphs found in this font");
-    return;
-  }
-
-  var table = "short_name,character,unicode";
-  for (glyphIndex in glyphs) {
-    var glyph = glyphs[glyphIndex];
-    var name = glyph.name;
-    var unicode = glyph.unicodes.map(formatUnicode).join(", ");
-    unicode = unicode.split(",")[0];
-    // var character = String.fromCharCode(glyph.unicode);
-    var character = String.fromCharCode(parseInt(glyph.unicodes.map(formatUnicode)[0], 16));
-    if (unicode) {
-      table += "\n" + name + "," + character + "," + unicode;
-    }
-    
-  }
-
-  console.log(table);
-});
+const fs = require("node:fs");
+const { parseArgs } = require("node:util");
+const opentype = require("opentype.js");
 
 function formatUnicode(unicode) {
-  unicode = unicode.toString(16);
-  if (unicode.length > 4) {
-    return ("000000" + unicode.toUpperCase()).substr(-6);
-  } else {
-    return ("0000" + unicode.toUpperCase()).substr(-4);
+  const width = unicode > 0xffff ? 6 : 4;
+  return unicode.toString(16).toUpperCase().padStart(width, "0");
+}
+
+function parseFont(file) {
+  const contents = fs.readFileSync(file);
+  return opentype.parse(
+    contents.buffer.slice(
+      contents.byteOffset,
+      contents.byteOffset + contents.byteLength
+    )
+  );
+}
+
+function glyphForCodepoint(font, codepoint) {
+  const glyph = font.charToGlyph(String.fromCodePoint(codepoint));
+  if (!glyph || glyph.index === 0 || glyph.name === ".notdef") {
+    throw new Error(`mapping codepoint ${formatUnicode(codepoint)} resolves to .notdef`);
+  }
+  return glyph;
+}
+
+function readOptions(args) {
+  const { values } = parseArgs({
+    args,
+    options: {
+      font: { type: "string", short: "f" },
+      mapping: { type: "string" },
+    },
+    strict: true,
+  });
+  if (!values.font) throw new Error("use -f to specify your font path");
+  if (!values.mapping) throw new Error("use --mapping to specify mapping.json");
+  return values;
+}
+
+function csvFor(font, mapping) {
+  const rows = ["short_name,character,unicode"];
+  for (const [name, codepoint] of Object.entries(mapping)) {
+    if (!Number.isInteger(codepoint) || codepoint < 0 || codepoint > 0x10ffff) {
+      throw new Error(`mapping contains an invalid codepoint for "${name}"`);
+    }
+    glyphForCodepoint(font, codepoint);
+    rows.push(
+      `${name},${String.fromCodePoint(codepoint)},${formatUnicode(codepoint)}`
+    );
+  }
+  return `${rows.join("\n")}\n`;
+}
+
+function main(args = process.argv.slice(2)) {
+  const options = readOptions(args);
+  const font = parseFont(options.font);
+  const mapping = JSON.parse(fs.readFileSync(options.mapping, "utf8"));
+  process.stdout.write(csvFor(font, mapping));
+}
+
+if (require.main === module) {
+  try {
+    main();
+  } catch (error) {
+    console.error(`Failed to export CSV: ${error.message}`);
+    process.exitCode = 1;
   }
 }
+
+module.exports = { csvFor, formatUnicode, glyphForCodepoint, main, readOptions };
