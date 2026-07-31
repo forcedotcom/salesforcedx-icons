@@ -40,14 +40,29 @@ test("generate-fonts applies Fantasticon 1 wide-viewBox normalization", () => {
   assert.equal(normalizeLegacyViewBox(tall), tall);
 });
 
-test("generate-fonts converts Windows input directories to glob paths", () => {
-  const { toGlobPath } = require(script);
+test("generate-fonts configures Fantasticon glob for Windows paths", async () => {
+  const { configureFantasticonGlob } = require(script);
+  const calls = [];
+  const originalGlob = async (pattern, options) => {
+    calls.push({ pattern, options });
+    return [];
+  };
+  const globModule = { glob: originalGlob };
 
-  assert.equal(
-    toGlobPath("C:\\Users\\runner\\AppData\\Local\\Temp\\icons", "win32"),
-    "C:/Users/runner/AppData/Local/Temp/icons"
-  );
-  assert.equal(toGlobPath("/tmp/icons", "linux"), "/tmp/icons");
+  const restore = configureFantasticonGlob("win32", () => globModule);
+  await globModule.glob("C:\\Temp\\icons\\**\\*.svg", { nodir: true });
+
+  assert.deepEqual(calls, [
+    {
+      pattern: "C:\\Temp\\icons\\**\\*.svg",
+      options: { nodir: true, windowsPathsNoEscape: true },
+    },
+  ]);
+  restore();
+  assert.strictEqual(globModule.glob, originalGlob);
+
+  assert.doesNotThrow(() => configureFantasticonGlob("linux", () => globModule)());
+  assert.strictEqual(globModule.glob, originalGlob);
 });
 
 test("generate-fonts prepares canonical action sources without changing source", () => {

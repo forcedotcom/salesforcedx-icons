@@ -1,6 +1,7 @@
 const fs = require("node:fs");
 const os = require("node:os");
 const path = require("node:path");
+const { createRequire } = require("node:module");
 const { parseArgs } = require("node:util");
 const { DOMParser, XMLSerializer, onWarningStopParsing } = require("@xmldom/xmldom");
 
@@ -34,9 +35,20 @@ function readIconSet(args) {
   return values.iconSet;
 }
 
-function toGlobPath(directory, platform = process.platform) {
-  // Fantasticon passes inputDir to glob, whose patterns require forward slashes.
-  return platform === "win32" ? directory.replaceAll("\\", "/") : directory;
+function configureFantasticonGlob(
+  platform = process.platform,
+  loadGlob = () => createRequire(require.resolve("fantasticon"))("glob")
+) {
+  if (platform !== "win32") return () => {};
+
+  const globModule = loadGlob();
+  const originalGlob = globModule.glob;
+  globModule.glob = (pattern, options = {}) =>
+    originalGlob(pattern, { ...options, windowsPathsNoEscape: true });
+
+  return () => {
+    globModule.glob = originalGlob;
+  };
 }
 
 function normalizeLegacyViewBox(source) {
@@ -97,19 +109,25 @@ async function main(args = process.argv.slice(2)) {
   const iconSet = readIconSet(args);
   const configFile = path.join(__dirname, "..", "src", iconSet, "fantasticon.js");
   const config = require(configFile);
-  const { generateFonts } = require("fantasticon");
   const { inputDirectory, temporaryRoot } = prepareInputDirectory(
     path.resolve(config.inputDir),
     iconSet
   );
+  let restoreGlob = () => {};
 
   try {
+    // Fantasticon joins glob patterns with Windows path separators. Configure
+    // its glob instance to interpret those separators correctly until upstream
+    // issue tancredi/fantasticon#470 is fixed.
+    restoreGlob = configureFantasticonGlob();
+    const { generateFonts } = require("fantasticon");
     await generateFonts({
       ...config,
-      inputDir: toGlobPath(inputDirectory),
+      inputDir: inputDirectory,
       codepoints: { ...config.codepoints, ...aliasesFor(iconSet) },
     });
   } finally {
+    restoreGlob();
     fs.rmSync(temporaryRoot, { recursive: true, force: true });
   }
 }
@@ -124,9 +142,9 @@ if (require.main === module) {
 module.exports = {
   COMPATIBILITY_ALIASES,
   aliasesFor,
+  configureFantasticonGlob,
   main,
   normalizeLegacyViewBox,
   prepareInputDirectory,
   readIconSet,
-  toGlobPath,
 };
