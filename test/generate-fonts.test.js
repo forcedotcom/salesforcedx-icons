@@ -2,6 +2,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const os = require("node:os");
 const path = require("node:path");
+const nodeProcess = require("node:process");
 const { spawnSync } = require("node:child_process");
 const test = require("node:test");
 
@@ -90,7 +91,7 @@ test("generate-fonts prepares canonical action sources without changing source",
 
 test("generate-fonts rejects an unsupported icon set", () => {
   const result = spawnSync(
-    process.execPath,
+    nodeProcess.execPath,
     [script, "--iconSet", "missing-icons"],
     { cwd: root, encoding: "utf8" }
   );

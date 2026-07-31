@@ -1,6 +1,7 @@
 const fs = require("node:fs");
 const os = require("node:os");
 const path = require("node:path");
+const nodeProcess = require("node:process");
 const { createRequire } = require("node:module");
 const { parseArgs } = require("node:util");
 const { DOMParser, XMLSerializer, onWarningStopParsing } = require("@xmldom/xmldom");
@@ -36,7 +37,7 @@ function readIconSet(args) {
 }
 
 function configureFantasticonGlob(
-  platform = process.platform,
+  platform = nodeProcess.platform,
   loadGlob = () => createRequire(require.resolve("fantasticon"))("glob")
 ) {
   if (platform !== "win32") return () => {};
@@ -105,7 +106,7 @@ function prepareInputDirectory(sourceDirectory, iconSet) {
   }
 }
 
-async function main(args = process.argv.slice(2)) {
+async function main(args = nodeProcess.argv.slice(2)) {
   const iconSet = readIconSet(args);
   const configFile = path.join(__dirname, "..", "src", iconSet, "fantasticon.js");
   const config = require(configFile);
@@ -135,7 +136,7 @@ async function main(args = process.argv.slice(2)) {
 if (require.main === module) {
   main().catch((error) => {
     console.error(`Failed to generate fonts: ${error.message}`);
-    process.exitCode = 1;
+    nodeProcess.exitCode = 1;
   });
 }
 
