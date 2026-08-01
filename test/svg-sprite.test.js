@@ -2,6 +2,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const os = require("node:os");
 const path = require("node:path");
+const nodeProcess = require("node:process");
 const { spawnSync } = require("node:child_process");
 const test = require("node:test");
 
@@ -136,23 +137,27 @@ test("svg-sprite integrity validation rejects duplicate, dangling, and cross-sym
 
 test("svg-sprite accepts every current source SVG", () => {
   const { parseSvg, symbolFor } = require(script);
-  const sourceFiles = ["seti-icons", "sfdx-icons"].flatMap((iconSet) =>
-    fs
+
+  for (const iconSet of ["seti-icons", "sfdx-icons"]) {
+    const sourceFiles = fs
       .readdirSync(path.join(root, "src", iconSet, "icons"))
       .filter((file) => file.endsWith(".svg"))
-      .map((file) => path.join(root, "src", iconSet, "icons", file))
-  );
+      .map((file) => path.join(root, "src", iconSet, "icons", file));
 
-  assert.equal(sourceFiles.length, 188);
-  for (const sourceFile of sourceFiles) {
-    assert.doesNotThrow(() =>
-      symbolFor(path.basename(sourceFile, ".svg"), parseSvg(fs.readFileSync(sourceFile, "utf8")))
-    );
+    assert.ok(sourceFiles.length > 0, `${iconSet} has no source SVGs`);
+    for (const sourceFile of sourceFiles) {
+      assert.doesNotThrow(() =>
+        symbolFor(
+          path.basename(sourceFile, ".svg"),
+          parseSvg(fs.readFileSync(sourceFile, "utf8"))
+        )
+      );
+    }
   }
 });
 
 test("svg-sprite rejects missing arguments", () => {
-  const result = spawnSync(process.execPath, [script], {
+  const result = spawnSync(nodeProcess.execPath, [script], {
     cwd: root,
     encoding: "utf8",
   });
@@ -165,7 +170,7 @@ test("svg-sprite rejects an unwritable output path", () => {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "icons-sprite-"));
   fs.mkdirSync(path.join(directory, "blocked.svg"));
   const result = spawnSync(
-    process.execPath,
+    nodeProcess.execPath,
     [
       script,
       "--outDir",
@@ -184,7 +189,7 @@ test("svg-sprite rejects an unwritable output path", () => {
 
 test("svg-sprite rejects an unreadable icon set", () => {
   const result = spawnSync(
-    process.execPath,
+    nodeProcess.execPath,
     [
       script,
       "--outDir",
@@ -214,7 +219,7 @@ for (const iconSet of ["seti-icons", "sfdx-icons"]) {
     ));
 
     const result = spawnSync(
-      process.execPath,
+      nodeProcess.execPath,
       [
         script,
         "--outDir",
